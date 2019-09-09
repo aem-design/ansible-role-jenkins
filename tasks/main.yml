@@ -8,15 +8,22 @@
   include_role:
     name: aem_design.docker_container
   vars:
-    env:
+    docker_container_name: "{{ docker_container_name }}"
+    docker_image: "{{ docker_image }}"
+    docker_image_tag: "{{ docker_image_tag }}"
+    docker_published_ports: {{ docker_published_ports }}
+    docker_volumes: {{ docker_volumes }}
+    docker_env:
       TZ: "{{ docker.timezone }}"
       JAVA_ARGS: "{{ service_jvm_opts }}"
+      JENKINS_SLAVE_AGENT_PORT: "{{ service_jenkins_agent_port }}"
+      JENKINS_SLAVE_COUNT: "{{ service_jenkins_slave_count }}"
   tags:
     - docker-container
 
 - name: wait until service is ready {{ role_comment }}
   uri:
-    url: "http://{{ service_jenkins_address }}:{{ service_jenkins_http_port }}"
+    url: "http://{{ service_jenkins_host }}:{{ service_jenkins_http_port }}"
     return_content: true
     timeout: 300
     status_code: 403

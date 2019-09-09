@@ -23,6 +23,8 @@ Available variables are listed below, along with default values (see `defaults/m
 | docker_container_name      	|          	| jenkins                                                                   	|                             	|
 | service_jenkins_http_port  	|          	| 8080                                                                      	|                             	|
 | service_jenkins_agent_port 	|          	| 50000                                                                     	|                             	|
+| service_jenkins_host 	        |          	| localhost                                                                     |                             	|
+| service_jenkins_slave_count 	|          	| 2                                                                     	    |                             	|
 |                            	|          	|                                                                           	|                             	|
 | service_jvm_opts           	|          	| -Dhudson.security.HudsonPrivateSecurityRealm.ID_REGEX=[a-zA-Z0-9_.@-]+    	| allow more chars in user id 	|
 |                            	|          	|                                                                           	|                             	|
