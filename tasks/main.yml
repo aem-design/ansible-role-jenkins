@@ -1,6 +1,7 @@
 ---
 
-- set_fact:
+- name: set facts
+  set_fact:
     role_comment: "( {{ docker_container_name | default('jenkins') }} )"
 
 - name: ensure container is started {{ role_comment }}
