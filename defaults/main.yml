@@ -8,7 +8,7 @@ docker_container_name: "jenkins"
 service_jenkins_http_port: 8080
 service_jenkins_agent_port: 50000
 
-service_jvm_opts: "-Dhudson.security.HudsonPrivateSecurityRealm.ID_REGEX=[a-zA-Z0-9_.@-]+" #allow more chars in user id
+service_jvm_opts: "-Dhudson.security.HudsonPrivateSecurityRealm.ID_REGEX=[a-zA-Z0-9_.@-]+"      # allow more chars in user id
 
 docker_published_ports:
   - "0.0.0.0:{{ service_jenkins_http_port | default('8080') }}:8080/tcp"

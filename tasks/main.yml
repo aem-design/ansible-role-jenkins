@@ -22,7 +22,7 @@
 - name: wait until service is ready {{ role_comment }}
   uri:
     url: "http://{{ service_jenkins_address }}:{{ service_jenkins_http_port }}"
-    return_content: yes
+    return_content: true
     timeout: 300
     status_code: 403
   register: service_console
