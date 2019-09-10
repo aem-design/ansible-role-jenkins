@@ -49,9 +49,7 @@ Available variables are listed below, along with default values (see `defaults/m
 
 ## Dependencies
 
-This role depends on roles:
- 
-- `aem_design.docker_container`
+None.
 
 ## Example Playbook
 
