@@ -1,0 +1,9 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install role dependencies
+      raw: pip install docker
+      become: true
+      changed_when: false
