@@ -23,7 +23,7 @@
 
   roles:
     - {
-      role: ansible-role-jenkins,
+      role: "{{ role_name }}",
       service_jenkins_host: "{{ dockerhost_ip.stdout }}",
       debug_hide: false
     }
