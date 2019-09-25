@@ -5,14 +5,11 @@
   vars:
     local_role_name: "ansible-role-jenkins"
     role_name: "{% if lookup('env','ROLE_NAME_FULL') %}{{ lookup('env','ROLE_NAME_FULL') }}{% else %}{{ local_role_name }}{% endif %}"
+    test_container_name: "{{ local_role_name }}-test"
 
   pre_tasks:
-    - name: Update apt cache.
-      apt: update_cache=yes cache_valid_time=600
-      when: ansible_os_family == 'Debian'
-
     - name: get docker host ip
-      become: yes
+      become: true
       shell: |
         set -o pipefail
         /sbin/ip route | awk '/default/ { print $3 }'
@@ -25,5 +22,14 @@
     - {
       role: "{{ role_name }}",
       service_jenkins_host: "{{ dockerhost_ip.stdout }}",
-      debug_hide: false
+      docker_container_name: "{{ test_container_name }}",
+      debug_hide: false,
+      docker_host: "unix://tmp/docker.sock"
     }
+
+  post_tasks:
+    - name: remove new container
+      docker_container:
+        name: "{{ test_container_name }}"
+        state: absent
+        force_kill: true
