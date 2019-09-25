@@ -19,3 +19,5 @@ docker_published_ports:
 
 docker_volumes:
   - "jenkins-data:/var/jenkins_home:z"
+
+docker_host: "unix://var/run/docker.sock"    # host where to run the docker container for executing pyaem2 commands

@@ -40,6 +40,8 @@ Available variables are listed below, along with default values (see `defaults/m
 | docker_container_group     	|          	| {{ docker_container_name }}                                               	|                             	|
 | docker_container_groupid   	|          	| 10001                                                                     	|                             	|
 |                            	|          	|                                                                           	|                             	|
+| docker_host                       |           | unix://var/run/docker.sock | host where to run the docker container for executing pyaem2 commands |
+|                            	|          	|                                                                           	|                             	|
 
 
 ## Dependencies
