@@ -40,11 +40,6 @@ Available variables are listed below, along with default values (see `defaults/m
 | docker_container_group     	|          	| {{ docker_container_name }}                                               	|                             	|
 | docker_container_groupid   	|          	| 10001                                                                     	|                             	|
 |                            	|          	|                                                                           	|                             	|
-| iptable_rules              	|          	|                                                                           	|                             	|
-|                            	|          	| - port: "{{ service_jenkins_http_port | default('8080') }}"               	|                             	|
-|                            	|          	| comment: "service_jenkins_http_port"                                      	|                             	|
-|                            	|          	| - port: "{{ service_jenkins_agent_port | default('50000') }}"             	|                             	|
-|                            	|          	| comment: "service_jenkins_agent_port"                                     	|                             	|
 
 
 ## Dependencies

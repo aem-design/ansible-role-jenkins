@@ -19,9 +19,3 @@ docker_published_ports:
 
 docker_volumes:
   - "jenkins-data:/var/jenkins_home:z"
-
-iptable_rules:
-  - port: "{{ service_jenkins_http_port | default('8080') }}"
-    comment: "service_jenkins_http_port"
-  - port: "{{ service_jenkins_agent_port | default('50000') }}"
-    comment: "service_jenkins_agent_port"
