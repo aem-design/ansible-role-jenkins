@@ -17,6 +17,12 @@
         executable: /bin/bash
       register: dockerhost_ip
       changed_when: false
+    - name: checkout aemdesign-jenkins
+      git:
+        repo: "https://github.com/aem-design/aemdesign-jenkins.git"
+        dest: "/tmp/gitrepo/aemdesign-jenkins"
+        version: "master"
+        clone: true
 
   roles:
     - {

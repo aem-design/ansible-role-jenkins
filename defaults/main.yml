@@ -18,6 +18,8 @@ docker_published_ports:
   - "0.0.0.0:{{ service_jenkins_agent_port | default('50000') }}:50000/tcp"
 
 docker_volumes:
-  - "jenkins-data:/var/jenkins_home:z"
+  - "jenkins_home:/var/jenkins_home"
+  - "{{ lookup('env','HOME') }}/gitrepotemp/aemdesign-jenkins/casc_configs:/var/jenkins_conf"
+  - "{{ lookup('env','HOME') }}/gitrepotemp/aemdesign-jenkins/tools:/var/jenkins_tools"
 
 docker_host: "unix://var/run/docker.sock"    # host where to run the docker container for executing pyaem2 commands

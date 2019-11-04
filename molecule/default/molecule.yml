@@ -25,6 +25,7 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /var/run/docker.sock:/tmp/docker.sock
+      - ${HOME}/gitrepotemp:/tmp/gitrepo
     privileged: true
     pre_build_image: true
 scenario:

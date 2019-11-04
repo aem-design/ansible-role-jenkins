@@ -4,7 +4,7 @@
   set_fact:
     role_comment: "( {{ docker_container_name | default('jenkins') }} )"
 
-- name: ensure container is started {{ role_comment }}
+- name: ensure container is started
   docker_container:
     name: "{{ docker_container_name }}"
     image: "{{ docker_image }}{% if docker_image %}:{% endif %}{{ docker_image_tag }}"
@@ -16,16 +16,31 @@
       JAVA_ARGS: "{{ service_jvm_opts }}"
       JENKINS_SLAVE_AGENT_PORT: "{{ service_jenkins_agent_port }}"
       JENKINS_SLAVE_COUNT: "{{ service_jenkins_slave_count }}"
+    state: started
   tags:
     - docker-container
 
-- name: wait until service is ready {{ role_comment }}
+- name: wait until service is ready
   uri:
     url: "http://{{ service_jenkins_host }}:{{ service_jenkins_http_port }}"
     return_content: true
-    timeout: 300
-    status_code: 403
-  register: service_console
-  until: service_console.content.find('You are authenticated as') != -1
+    timeout: 10
+  register: result
+  until: result.status == 200
   delay: "{{ wait_delay | default(5) }}"
-  retries: 360
+  retries: 30
+
+- name: ensure github oauth plugin is working
+  uri:
+    url: "http://{{ service_jenkins_host }}:{{ service_jenkins_http_port }}/securityRealm/commenceLogin"
+    status_code: 302
+    follow_redirects: "none"
+    timeout: 10
+  register: result2
+  until: result2.location.find('github') != -1
+  retries: 1
+
+- name: stop docker container {{ docker_container_name }}
+  docker_container:
+    name: "{{ docker_container_name }}"
+    state: stopped
